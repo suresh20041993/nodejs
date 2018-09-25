@@ -37,6 +37,14 @@ var leadDisplayController  = require('./leadmanagement/leadDisplay-controller.js
 
 /*lead Details */
 var leadDetailsEntryController  = require('./leadmanagement/leadDetailsEntry-controller.js');
+/* lead Employment details*/
+
+var leadEmploymentDetailsEntryController  = require('./leadmanagement/leadEmploymentDetailEntry-controller.js');
+/*lead current address details*/
+
+var leadCurrentAddressDetailEntryController  = require('./leadmanagement/leadCurrentAddressDetailEntry-controller.js');
+
+var leadPermanentAddressDetailEntryController  = require('./leadmanagement/leadPermanentAddressDetailEntry-controller.js');
 
 process.env.SECRET_KEY="purple";
 
@@ -58,11 +66,12 @@ app.post('/api/leadDisplay',leadDisplayController.leadDisplay);
 
 app.post('/api/leadDetailsEntry',leadDetailsEntryController.leadDetailsEntry);
 
+app.post('/api/leadEmploymentDetailsEntry',leadEmploymentDetailsEntryController.leadEmploymentDetailsEntry);
+
+app.post('/api/leadCurrentAddressDetailEntry',leadCurrentAddressDetailEntryController.leadCurrentAddressDetailEntry);
 
 
-
-
-
+app.post('/api/leadPermanentAddressDetailEntry',leadPermanentAddressDetailEntryController.leadPermanentAddressDetailEntry);
 
 app.post('/api/appoinment',appoinmentController.appoinment);
 

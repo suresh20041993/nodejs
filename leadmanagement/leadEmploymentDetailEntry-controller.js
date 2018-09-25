@@ -47,7 +47,7 @@ exports.leadEmploymentDetailsEntry=function(req,res){
                            console.log('The solution is: ', result);
                            res.send({
                              "code":200,
-                            "message":"Lead Details inserted sucessfully"
+                            "message":"Lead Employment Details inserted sucessfully"
                                });
                          }
                          });
@@ -68,7 +68,7 @@ exports.leadEmploymentDetailsEntry=function(req,res){
                           console.log('The solution is: ', result);
                           res.send({
                             "code":200,
-                            "message":"Lead Details Update sucessfully"
+                            "message":"Lead Employment Details Update sucessfully"
                               });
                         }
                         });
