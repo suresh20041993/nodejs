@@ -50,7 +50,7 @@ var leadEducationDetailEntrycontroller = require('./leadmanagement/leadEducation
 
 var leadBussinessandTurnoverdetailscontroller = require('./leadmanagement/leadBussinessandTurnoverdetails-controller.js');
 
-
+var leadBankDetailEntrycontroller = require('./leadmanagement/leadBankDetailEntry-controller.js');
 
 
 process.env.SECRET_KEY="purple";
@@ -83,6 +83,8 @@ app.post('/api/leadEducationDetailEntry',leadEducationDetailEntrycontroller.lead
 
 app.post('/api/leadBussinessandTurnoverdetailsEntry',leadBussinessandTurnoverdetailscontroller.leadBussinessandTurnoverdetailsEntry);
 
+
+app.post('/api/leadBankDetailEntry',leadBankDetailEntrycontroller.leadBankDetailEntry);
 
 
 app.post('/api/appoinment',appoinmentController.appoinment);
