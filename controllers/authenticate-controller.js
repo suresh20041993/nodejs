@@ -2,48 +2,53 @@ var jwt=require('jsonwebtoken');
 
 var connection = require('./../config');
 
-exports.authenticate = function(req,res){
+module.exports.authenticate = function(req,res){
 
     //console.log('hhh');
 
     console.log(req.body);
     // console.log(password);
-    var UserName=req.body.UserName;
+    var user=req.body.UserName;
     
-    var Password=req.body.Password;
+    var pass=req.body.Password;
+    //var Password = 'ec4b90b5ab6a3c6d1e3ce12d07f8eda74b012ff4a2f575ab02567650647df880';
+    console.log(user);    
+    console.log(pass); 
     
-    console.log(UserName);    
-    console.log(Password); 
-    
-   connection.query('SELECT * FROM users WHERE username = ?',[UserName], function (error, results, fields) {
-  if (error) {
-    // console.log("error ocurred",error);
-    res.send({
-      "code":400,
-      "failed":"error ocurred"
-    })
-  }else{
-    // console.log('The solution is: ', results);
-    if(results.length >0){
-      if(results[0].password == Password){
-        res.send({
-          "code":200,
-          "success":"login sucessfull"
+
+   // connection.query('SELECT * FROM ab_users WHERE username = ?',[UserName], function (error, results, fields) {
+    connection.query("select count(*) as count from ab_users where username='"+ user +"' and password='"+ pass +"';", function(err, data, fields){
+      
+   var user = [{
+        'username':user,
+        'password':pass
+    }];
+
+    if(err){
+        console.log(err);
+        res.end(JSON.stringify(err));
+        res.end();
+    }else{
+        var message = '';
+        console.log(data);
+        if(data[0].count > 0){
+            var flag = true;
+            var token=jwt.sign({user},'kdcaSecurity');
+            message="Login Successful";
+            res.status(200).json({
+                message,
+                token,
+                flag
             });
-      }
-      else{
-        res.send({
-          "code":204,
-          "success":"Email and password does not match"
+        }else{
+            var flag = false;
+            message = 'Username or Password Wrong.';
+            res.status(200).json({
+                message,
+                flag
             });
-      }
-    }
-    else{
-      res.send({
-        "code":204,
-        "success":"Email does not exits"
-          });
-    }
-  }
-  });
+        }//end if    
+    }//end if
+    
+});//end Con.query
 }
