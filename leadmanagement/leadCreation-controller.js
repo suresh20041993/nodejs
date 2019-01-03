@@ -10,7 +10,7 @@ exports.leadCreation=function(req,res){
         console.log(req.body);
 
         var leadType=req.body.leadType;
-        var leadName=req.body.leadName;
+        var leadName=req.body.leadUserName;
         var lead_mobileNumber=req.body.PhoneNumber;
         var lead_sourceChannel = req.body.email;
         var userId=req.body.userId;
