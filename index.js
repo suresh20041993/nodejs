@@ -10,7 +10,21 @@ var app = express();
 
 var router=express.Router();
 
-app.use(bodyParser.urlencoded({ extended: false }));
+var http=require('http');
+
+var mongoose = require('mongoose');
+var path = require('path');
+
+
+
+
+
+
+app.use(bodyParser.urlencoded({ extended: true }));
+
+app.use(bodyParser.urlencoded({ limit: '50mb' }));
+app.use(bodyParser.json({limit:'50mb'}));
+
 app.all('*', function(req, res, next) {
     res.header('Access-Control-Allow-Origin', '*');
     res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
@@ -25,9 +39,9 @@ app.all('*', function(req, res, next) {
 
 var authenticateController = require('./controllers/authenticate-controller');
 
-var appoinmentController = require('./controllers/appoinment-controller');
+/*var appoinmentController = require('./controllers/appoinment-controller');*/
 
-var appoinmentlistController = require('./controllers/appoinment-controller');
+/*var appoinmentlistController = require('./controllers/appoinment-controller');*/
 
 /*Lead Creations */
 var leadCreationController  = require('./leadmanagement/leadCreation-controller.js');
@@ -52,8 +66,12 @@ var leadBussinessandTurnoverdetailscontroller = require('./leadmanagement/leadBu
 
 var leadBankDetailEntrycontroller = require('./leadmanagement/leadBankDetailEntry-controller.js');
 
+var leadExistingLoanDetailscontroller = require('./leadmanagement/leadExistingLoanDetails-controller.js');
 
-process.env.SECRET_KEY="purple";
+var leadSearchcontroller = require('./leadmanagement/leadSearch-controller.js');
+
+process.env.SECRET_KEY="thisismysecretkey";
+
 
 app.use(bodyParser.urlencoded({extended:true}));
 
@@ -61,9 +79,9 @@ app.use(bodyParser.json());
 
 /* route to handle login and registration */
 
-app.post('/api/appoinment',appoinmentController.appoinment);
+/*app.post('/api/appoinment',appoinmentController.appoinment);*/
 
-app.post('/api/appoinmentlist',appoinmentlistController.appoinmentlist);
+/*app.post('/api/appoinmentlist',appoinmentlistController.appoinmentlist);*/
 
 app.post('/api/authenticate',authenticateController.authenticate);
 
@@ -86,8 +104,11 @@ app.post('/api/leadBussinessandTurnoverdetailsEntry',leadBussinessandTurnoverdet
 
 app.post('/api/leadBankDetailEntry',leadBankDetailEntrycontroller.leadBankDetailEntry);
 
+app.post('/api/leadExistingLoanDetails',leadExistingLoanDetailscontroller.leadExistingLoanDetails);
 
-app.post('/api/appoinment',appoinmentController.appoinment);
+app.post('/api/leadSearch',leadSearchcontroller.leadSearch);
+
+/*app.post('/api/appoinment',appoinmentController.appoinment);*/
 
 app.use('/secure-api',router);
 // validation middleware
